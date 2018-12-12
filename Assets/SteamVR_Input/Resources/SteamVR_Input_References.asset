@@ -16,10 +16,12 @@ MonoBehaviour:
   - _default
   - platformer
   - buggy
+  - TeleRikshawInput
   actionSetObjects:
   - {fileID: 11400000, guid: ddf7e20d73635434caf401859a1f3787, type: 2}
   - {fileID: 11400000, guid: e2cd533889b02ab49aea1fd2b77fe795, type: 2}
   - {fileID: 11400000, guid: 12b393837d872684ea45a59fb8b420b2, type: 2}
+  - {fileID: 11400000, guid: c9a4cf1acad03e044a22e452e096a4fa, type: 2}
   actionNames:
   - __actions_default_in_InteractUI
   - __actions_default_in_Teleport
@@ -37,6 +39,10 @@ MonoBehaviour:
   - __actions_buggy_in_Throttle
   - __actions_buggy_in_Brake
   - __actions_buggy_in_Reset
+  - __actions_TeleRikshawInput_in_ResetHandleBar
+  - __actions_TeleRikshawInput_in_Accelerate
+  - __actions_TeleRikshawInput_in_Brake
+  - __actions_TeleRikshawInput_in_Horn
   actionObjects:
   - {fileID: 11400000, guid: 07b7d992f6f703d489353fe0a1ec7a9e, type: 2}
   - {fileID: 11400000, guid: 46c4ad5aa971f23499866f047ebbf0de, type: 2}
@@ -54,3 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa0771cf91601d743b0bc32ed4bc0cd4, type: 2}
   - {fileID: 11400000, guid: 8abc8fa5cd082b543b1d4510391c38c0, type: 2}
   - {fileID: 11400000, guid: 6b81022f9bca445408616d33278f4ece, type: 2}
+  - {fileID: 11400000, guid: 4d7b9e68905fd1b4c96989d1ae5d0191, type: 2}
+  - {fileID: 11400000, guid: 388e002733c3d9640ad1134217953eac, type: 2}
+  - {fileID: 11400000, guid: bf6ff99b098141446985891506bb33c5, type: 2}
+  - {fileID: 11400000, guid: bb7ca507bfcca6649b34a8dbd4932645, type: 2}

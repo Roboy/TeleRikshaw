@@ -4,6 +4,7 @@ using Valve.VR.InteractionSystem;
 
 namespace TeleRikshaw.Rikshaw
 {
+    [RequireComponent(typeof(ControlRosPublisher))]
     public class HandleBarControl : MonoBehaviour
     {
 
@@ -11,6 +12,9 @@ namespace TeleRikshaw.Rikshaw
         public GameObject LeftController;
         public GameObject RightController;
         public SteamVR_Action_Boolean ResetHandleBarAction;
+        public SteamVR_Action_Single AccelerateAction;
+        public SteamVR_Action_Single BrakeAction;
+        public SteamVR_Action_Boolean HornAction;
         #endregion // PUBLIC_VARIABLES
 
         #region PRIVATE_VARIABLES
@@ -23,6 +27,8 @@ namespace TeleRikshaw.Rikshaw
         private float m_SteerAngle;
 
         private Vector3 m_Up = new Vector3(0, 1, 0);
+
+        private ControlRosPublisher publisher;
         #endregion PRIVATE_VARIABLES
 
         #region MONOBEHAVIOUR_FUNCTIONS
@@ -39,6 +45,7 @@ namespace TeleRikshaw.Rikshaw
 
         private void Start()
         {
+            publisher = GetComponent<ControlRosPublisher>();
             InitializeHandleBar();
         }
 
@@ -48,6 +55,7 @@ namespace TeleRikshaw.Rikshaw
             {
                 getOrientationOfVRController();
                 steerHandleBar();
+                publisher.PublishControlMessage(ControlRosPublisher.ControlType.steer, m_SteerAngle);
             }
         }
         #endregion MONOBEHAVIOUR_FUNCTIONS
@@ -88,6 +96,22 @@ namespace TeleRikshaw.Rikshaw
             InitializeHandleBar();
         }
         #endregion PRIVATE_MEMBER_FUNCTIONS
+
+        private void accelerate(SteamVR_Action_In actionIn)
+        {
+            publisher.PublishControlMessage(ControlRosPublisher.ControlType.accelerate, 1);
+        }
+
+        private void brake(SteamVR_Action_In actionIn)
+        {
+            publisher.PublishControlMessage(ControlRosPublisher.ControlType.brake, 1);
+
+        }
+
+        private void horn(SteamVR_Action_In actionIn)
+        {
+            publisher.PublishControlMessage(ControlRosPublisher.ControlType.horn, 1);
+        }
     }
 
 }

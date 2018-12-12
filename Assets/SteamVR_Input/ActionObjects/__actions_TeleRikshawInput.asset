@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9551fdee33effad47899190f7fa23f6c, type: 3}
+  m_Name: __actions_TeleRikshawInput
+  m_EditorClassIdentifier: 
+  allActions:
+  - {fileID: 11400000, guid: 4d7b9e68905fd1b4c96989d1ae5d0191, type: 2}
+  - {fileID: 11400000, guid: 388e002733c3d9640ad1134217953eac, type: 2}
+  - {fileID: 11400000, guid: bf6ff99b098141446985891506bb33c5, type: 2}
+  - {fileID: 11400000, guid: bb7ca507bfcca6649b34a8dbd4932645, type: 2}
+  nonVisualInActions:
+  - {fileID: 11400000, guid: 4d7b9e68905fd1b4c96989d1ae5d0191, type: 2}
+  - {fileID: 11400000, guid: 388e002733c3d9640ad1134217953eac, type: 2}
+  - {fileID: 11400000, guid: bf6ff99b098141446985891506bb33c5, type: 2}
+  - {fileID: 11400000, guid: bb7ca507bfcca6649b34a8dbd4932645, type: 2}
+  visualActions: []
+  poseActions: []
+  skeletonActions: []
+  outActionArray: []
+  fullPath: /actions/TeleRikshawInput
+  usage: single
+  inActions: {fileID: 11400000, guid: 07419566763a1924d83dbf83aca13c09, type: 2}

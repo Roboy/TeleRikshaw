@@ -49,6 +49,14 @@ namespace Valve.VR
         
         public static SteamVR_Action_Boolean @__actions_buggy_in_Reset;
         
+        public static SteamVR_Action_Boolean @__actions_TeleRikshawInput_in_ResetHandleBar;
+        
+        public static SteamVR_Action_Single @__actions_TeleRikshawInput_in_Accelerate;
+        
+        public static SteamVR_Action_Single @__actions_TeleRikshawInput_in_Brake;
+        
+        public static SteamVR_Action_Boolean @__actions_TeleRikshawInput_in_Horn;
+        
         public static void Dynamic_InitializeActions()
         {
             SteamVR_Input.@__actions_default_in_InteractUI.Initialize();
@@ -67,6 +75,10 @@ namespace Valve.VR
             SteamVR_Input.@__actions_buggy_in_Throttle.Initialize();
             SteamVR_Input.@__actions_buggy_in_Brake.Initialize();
             SteamVR_Input.@__actions_buggy_in_Reset.Initialize();
+            SteamVR_Input.@__actions_TeleRikshawInput_in_ResetHandleBar.Initialize();
+            SteamVR_Input.@__actions_TeleRikshawInput_in_Accelerate.Initialize();
+            SteamVR_Input.@__actions_TeleRikshawInput_in_Brake.Initialize();
+            SteamVR_Input.@__actions_TeleRikshawInput_in_Horn.Initialize();
         }
         
         public static void Dynamic_InitializeInstanceActions()
@@ -87,6 +99,10 @@ namespace Valve.VR
             Valve.VR.SteamVR_Input.@__actions_buggy_in_Throttle = ((SteamVR_Action_Single)(SteamVR_Input_References.GetAction("__actions_buggy_in_Throttle")));
             Valve.VR.SteamVR_Input.@__actions_buggy_in_Brake = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_buggy_in_Brake")));
             Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_buggy_in_Reset")));
+            Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_ResetHandleBar = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_TeleRikshawInput_in_ResetHandleBar")));
+            Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Accelerate = ((SteamVR_Action_Single)(SteamVR_Input_References.GetAction("__actions_TeleRikshawInput_in_Accelerate")));
+            Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Brake = ((SteamVR_Action_Single)(SteamVR_Input_References.GetAction("__actions_TeleRikshawInput_in_Brake")));
+            Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Horn = ((SteamVR_Action_Boolean)(SteamVR_Input_References.GetAction("__actions_TeleRikshawInput_in_Horn")));
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
                     Valve.VR.SteamVR_Input.@__actions_default_in_InteractUI,
                     Valve.VR.SteamVR_Input.@__actions_default_in_Teleport,
@@ -103,7 +119,11 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Steering,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Throttle,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Brake,
-                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset};
+                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_ResetHandleBar,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Accelerate,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Brake,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Horn};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.SteamVR_Action_In[] {
                     Valve.VR.SteamVR_Input.@__actions_default_in_InteractUI,
                     Valve.VR.SteamVR_Input.@__actions_default_in_Teleport,
@@ -119,7 +139,11 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Steering,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Throttle,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Brake,
-                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset};
+                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_ResetHandleBar,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Accelerate,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Brake,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Horn};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.SteamVR_Action_Out[] {
                     Valve.VR.SteamVR_Input.@__actions_default_out_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -134,10 +158,14 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.@__actions_default_in_ResetHandleBar,
                     Valve.VR.SteamVR_Input.@__actions_platformer_in_Jump,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Brake,
-                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset};
+                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_ResetHandleBar,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Horn};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     Valve.VR.SteamVR_Input.@__actions_default_in_Squeeze,
-                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Throttle};
+                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Throttle,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Accelerate,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Brake};
             Valve.VR.SteamVR_Input.actionsVector2 = new Valve.VR.SteamVR_Action_Vector2[] {
                     Valve.VR.SteamVR_Input.@__actions_platformer_in_Move,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Steering};
@@ -157,7 +185,11 @@ namespace Valve.VR
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Steering,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Throttle,
                     Valve.VR.SteamVR_Input.@__actions_buggy_in_Brake,
-                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset};
+                    Valve.VR.SteamVR_Input.@__actions_buggy_in_Reset,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_ResetHandleBar,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Accelerate,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Brake,
+                    Valve.VR.SteamVR_Input.@__actions_TeleRikshawInput_in_Horn};
         }
     }
 }

@@ -66,6 +66,22 @@
     {
       "name": "/actions/buggy/in/Reset",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/TeleRikshawInput/in/ResetHandleBar",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/TeleRikshawInput/in/Accelerate",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/TeleRikshawInput/in/Brake",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/TeleRikshawInput/in/Horn",
+      "type": "boolean"
     }
   ],
   "action_sets": [
@@ -79,6 +95,10 @@
     },
     {
       "name": "/actions/buggy",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/TeleRikshawInput",
       "usage": "single"
     }
   ],
@@ -117,7 +137,11 @@
       "/actions/buggybuddy/in/Reset": "Reset",
       "/actions/platformer/in/Move": "Move",
       "/actions/platformer/in/Jump": "Jump",
-      "/actions/default/in/ResetHandleBar": "ResetHandleBar"
+      "/actions/default/in/ResetHandleBar": "ResetHandleBar",
+      "/actions/TeleRikshawInput/in/ResetHandleBar": "ResetHandleBar",
+      "/actions/TeleRikshawInput/in/Accelerate": "Accelerate",
+      "/actions/TeleRikshawInput/in/Brake": "Brake",
+      "/actions/TeleRikshawInput/in/Horn": "Horn"
     }
   ]
 }
