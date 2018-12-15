@@ -4,11 +4,11 @@
 This package accomplishes the communication between Unity and ROS.
 
 Unity sends RC car commands to the RaspberryPi by publishing to the following topics via [rosbridge_server](http://wiki.ros.org/rosbridge_server) and [ROS#](https://github.com/siemens/ros-sharp):
-* `TODO` (direction of car)
-* `TODO` (speed)
-* `TODO` (direction of camera)
-* `TODO` (buzzer)
-* `TODO` (sound)
+* `direction_car`
+* `speed`
+* `direction_camera`
+* `honking`
+* `music`
 
 There is one ROS node subscribing to each topic and writing the corresponding command to the serial port of the Arduino:
 * [`camera_direction_subscriber`](https://github.com/Roboy/TeleRikshaw/blob/devel/RaspberryPi/file_server/src/camera_direction_subscriber.py)
