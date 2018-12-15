@@ -10,8 +10,8 @@ def camera_direction_subscriber():
 
     rospy.init_node('camera_direction_subscriber', anonymous=True)
     # TODO: topic
-    rospy.Subscriber("test", Int16, callback)
-    rospy.spin()
+    rospy.Subscriber("direction_camera", Int16, callback)
+    rospy.spin()  
 
 if __name__ == '__main__':
     camera_direction_subscriber()

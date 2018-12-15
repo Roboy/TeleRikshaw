@@ -10,7 +10,7 @@ def speed_subscriber():
 
     rospy.init_node('speed_subscriber', anonymous=True)
     # TODO: topic
-    rospy.Subscriber("test", Int16, callback)
+    rospy.Subscriber("speed", Int16, callback)
     rospy.spin()
 
 if __name__ == '__main__':

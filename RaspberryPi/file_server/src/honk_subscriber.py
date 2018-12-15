@@ -10,7 +10,7 @@ def honk_subscriber():
 
     rospy.init_node('honk_subscriber', anonymous=True)
     # TODO: topic
-    rospy.Subscriber("test", Int16, callback)
+    rospy.Subscriber("honking", Int16, callback)
     rospy.spin()
 
 if __name__ == '__main__':

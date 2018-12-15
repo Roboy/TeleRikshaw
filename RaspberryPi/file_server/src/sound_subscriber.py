@@ -10,7 +10,7 @@ def sound_subscriber():
 
     rospy.init_node('sound_subscriber', anonymous=True)
     # TODO: topic
-    rospy.Subscriber("test", Int16, callback)
+    rospy.Subscriber("music", Int16, callback)
     rospy.spin()
 
 if __name__ == '__main__':

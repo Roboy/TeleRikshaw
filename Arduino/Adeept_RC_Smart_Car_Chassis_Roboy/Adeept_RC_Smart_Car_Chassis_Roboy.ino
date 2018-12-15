@@ -3,10 +3,11 @@
 
 Servo dirServo;                                               // defines servo to control turning of car
 int dirServoPin = 2;                                          // defines pin for signal line of the last servo
-int dirServoOffset = 6;                                       // defines a variable for deviation (degree) of the servo
+int dirServoOffset = 8;                                       // defines a variable for deviation (degree) of the servo
 
 Servo ultrasonicServo;                                        // define servo to control turning of ultrasonic sensor
 int ultrasonicPin = 3;                                        // define pin for signal line of the last servo
+int ultraServoOffset = 2;                                       // defines a variable for deviation (degree) of the cam servo
 int trigPin = 0;                                              // define Trig pin for ultrasonic ranging module
 int echoPin = 1;                                              // define Echo pin for ultrasonic ranging module
 
@@ -43,7 +44,7 @@ void setup() {
   dirServo.attach(dirServoPin);                               // attaches the servo on servoDirPin to the servo object
   dirServo.write(90-dirServoOffset);                                         // moves dirServo to 90 deg position (center)
   ultrasonicServo.attach(ultrasonicPin);                      // attaches the servo on ultrasonicPin to the servo object
-  ultrasonicServo.write(90);                                  // moves ultrasonicServo to 90 deg position (center)
+  ultrasonicServo.write(90-ultraServoOffset);                                  // moves ultrasonicServo to 90 deg position (center)
   
   pinMode(dirAPin, OUTPUT);                                   // sets dirAPin to output mode
   pinMode(pwmAPin, OUTPUT);                                   // sets pwmAPin to output mode
@@ -60,7 +61,7 @@ void setup() {
 // function to change car direction
 void carDirectionD(int DInt)
 {      
-    if(DInt > 39 && DInt < 141){
+    if(DInt > 44 && DInt < 136){
     DInt -= dirServoOffset;
     dirServo.write(DInt); 
     }
@@ -69,7 +70,8 @@ void carDirectionD(int DInt)
 // function to change cam direction
 void camDirectionC(int CInt)
 {       
-    if(CInt > 34 && CInt < 146){
+    if(CInt > 44 && CInt < 136){
+    CInt -= ultraServoOffset;
     ultrasonicServo.write(CInt);
     }
 }  
@@ -187,6 +189,17 @@ void serialEvent()
               default: break;
             }
       }
+      /*
+      char ch = Serial.read();
+      Serial.write(ch);
+      if(index < MaxChars && isDigit(ch)) { 
+            strValue[index++] = ch; 
+      } else { 
+            strValue[index] = 0;
+            serialInt = atoi(strValue);
+            index = 0;
+            carDirectionD(serialInt);
+      }*/
    }
 }
 
