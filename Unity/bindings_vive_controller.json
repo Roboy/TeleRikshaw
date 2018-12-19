@@ -267,11 +267,85 @@
                "path" : "/user/hand/right/input/trackpad"
             }
          ]
+      },
+      "/actions/telerikshaw" : {
+         "poses" : [
+            {
+               "output" : "/actions/telerikshaw/in/leftpose",
+               "path" : "/user/hand/left/pose/base"
+            },
+            {
+               "output" : "/actions/telerikshaw/in/rightpose",
+               "path" : "/user/hand/right/pose/base"
+            }
+         ],
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/telerikshaw/in/music"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/telerikshaw/in/honk"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/telerikshaw/in/resethandlebar"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/telerikshaw/in/resethandlebar"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "value" : {
+                     "output" : "/actions/telerikshaw/in/brake"
+                  }
+               },
+               "mode" : "scalar_constant",
+               "parameters" : {
+                  "on/x" : "0.8"
+               },
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "value" : {
+                     "output" : "/actions/telerikshaw/in/accelerate"
+                  }
+               },
+               "mode" : "scalar_constant",
+               "parameters" : {
+                  "on/x" : "0.8"
+               },
+               "path" : "/user/hand/right/input/trigger"
+            }
+         ]
       }
    },
    "controller_type" : "vive_controller",
-   "description" : "",
-   "name" : "vive_controller",
+   "description" : "TeleRikshawBinding",
+   "name" : "TeleRikshawBinding",
    "options" : {},
    "simulated_actions" : []
 }

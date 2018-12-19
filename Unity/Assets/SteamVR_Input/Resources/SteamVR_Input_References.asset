@@ -13,44 +13,24 @@ MonoBehaviour:
   m_Name: SteamVR_Input_References
   m_EditorClassIdentifier: 
   actionSetNames:
-  - _default
-  - platformer
-  - buggy
+  - TeleRikshaw
   actionSetObjects:
-  - {fileID: 11400000, guid: ddf7e20d73635434caf401859a1f3787, type: 2}
-  - {fileID: 11400000, guid: e2cd533889b02ab49aea1fd2b77fe795, type: 2}
-  - {fileID: 11400000, guid: 12b393837d872684ea45a59fb8b420b2, type: 2}
+  - {fileID: 11400000, guid: 51eee5286004146479cea66c50a1f36e, type: 2}
   actionNames:
-  - __actions_default_in_InteractUI
-  - __actions_default_in_Teleport
-  - __actions_default_in_GrabPinch
-  - __actions_default_in_GrabGrip
-  - __actions_default_in_Pose
-  - __actions_default_in_SkeletonLeftHand
-  - __actions_default_in_SkeletonRightHand
-  - __actions_default_in_Squeeze
-  - __actions_default_in_ResetHandleBar
-  - __actions_default_out_Haptic
-  - __actions_platformer_in_Move
-  - __actions_platformer_in_Jump
-  - __actions_buggy_in_Steering
-  - __actions_buggy_in_Throttle
-  - __actions_buggy_in_Brake
-  - __actions_buggy_in_Reset
+  - __actions_TeleRikshaw_in_ResetHandlebar
+  - __actions_TeleRikshaw_in_Accelerate
+  - __actions_TeleRikshaw_in_Brake
+  - __actions_TeleRikshaw_in_Honk
+  - __actions_TeleRikshaw_in_Music
+  - __actions_TeleRikshaw_in_LeftPose
+  - __actions_TeleRikshaw_in_RightPose
+  - __actions_TeleRikshaw_in_ResetScenePosition
   actionObjects:
-  - {fileID: 11400000, guid: 07b7d992f6f703d489353fe0a1ec7a9e, type: 2}
-  - {fileID: 11400000, guid: 46c4ad5aa971f23499866f047ebbf0de, type: 2}
-  - {fileID: 11400000, guid: e6e605f20b30a98419032fc74efa8ca6, type: 2}
-  - {fileID: 11400000, guid: 475c27d42d75e57419abc8dc1ca605c7, type: 2}
-  - {fileID: 11400000, guid: 54b0bc8372c3f494caf9fa9b08c4ba8a, type: 2}
-  - {fileID: 11400000, guid: 70fc1776ed2f7024fa380fb21816df8d, type: 2}
-  - {fileID: 11400000, guid: 26f876a85013b8d418450e3eb4996f8f, type: 2}
-  - {fileID: 11400000, guid: 40c1fba9d8b775340ae61019fe7bc3dc, type: 2}
-  - {fileID: 11400000, guid: dcd1f13d153b30641b82bdca6ffc7749, type: 2}
-  - {fileID: 11400000, guid: c05c0fccabc128a45969ffc686ae0978, type: 2}
-  - {fileID: 11400000, guid: 3f5a439eb0a008a47a3fbfc5da13e70f, type: 2}
-  - {fileID: 11400000, guid: 752f77de4fd2a764f9d344fbf349e5f7, type: 2}
-  - {fileID: 11400000, guid: 839de658d878c3449bdbeb0e78e054ff, type: 2}
-  - {fileID: 11400000, guid: fa0771cf91601d743b0bc32ed4bc0cd4, type: 2}
-  - {fileID: 11400000, guid: 8abc8fa5cd082b543b1d4510391c38c0, type: 2}
-  - {fileID: 11400000, guid: 6b81022f9bca445408616d33278f4ece, type: 2}
+  - {fileID: 11400000, guid: 6a72c9ef70daea24b8b5399333338a6b, type: 2}
+  - {fileID: 11400000, guid: 55b2cc3116c140d4e9dd0a335836d046, type: 2}
+  - {fileID: 11400000, guid: ffc6a3e936664a24eb420696193a8a9b, type: 2}
+  - {fileID: 11400000, guid: 628340e4de3408741b6783e67a53fdcf, type: 2}
+  - {fileID: 11400000, guid: c3479451f036c9e4f84baf97595ea56d, type: 2}
+  - {fileID: 11400000, guid: 6a0bfe3a7f0f00249a1dbd7d2f9ec7aa, type: 2}
+  - {fileID: 11400000, guid: cce72614498580e4e87a6b93a87ed695, type: 2}
+  - {fileID: 11400000, guid: 4fdb5557c5e489342a029f7015d6d50f, type: 2}

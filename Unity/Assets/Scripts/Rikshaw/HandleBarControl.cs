@@ -4,6 +4,9 @@ using Valve.VR.InteractionSystem;
 
 namespace TeleRikshaw.Rikshaw
 {
+    [RequireComponent(typeof(RosSpeedPublisher))]
+    [RequireComponent(typeof(RosSteerPublisher))]
+    [RequireComponent(typeof(RosHornPublisher))]
     public class HandleBarControl : MonoBehaviour
     {
 
@@ -11,6 +14,11 @@ namespace TeleRikshaw.Rikshaw
         public GameObject LeftController;
         public GameObject RightController;
         public SteamVR_Action_Boolean ResetHandleBarAction;
+        public SteamVR_Action_Boolean MusicAction;
+
+        public SteamVR_Action_Single AccelerateAction;
+        public SteamVR_Action_Single BrakeAction;
+
         #endregion // PUBLIC_VARIABLES
 
         #region PRIVATE_VARIABLES
@@ -19,26 +27,36 @@ namespace TeleRikshaw.Rikshaw
         private Vector3 m_ForwardVector;
         private Vector3 m_ControllerForwardVector;
 
-        private float m_LastSteerAngle;
-        private float m_SteerAngle;
+        private float m_LastSteerAngle = 0;
+        private float m_SteerAngle = 0;
 
         private Vector3 m_Up = new Vector3(0, 1, 0);
+
+        private RosSteerPublisher m_SteerPublisher;
+        private RosSpeedPublisher m_SpeedPublisher;
+        private RosHornPublisher m_HornPublisher;
         #endregion PRIVATE_VARIABLES
 
         #region MONOBEHAVIOUR_FUNCTIONS
         private void OnEnable()
         {
-            if (ResetHandleBarAction == null)
+            if (ResetHandleBarAction == null || AccelerateAction == null || BrakeAction == null)
             {
-                Debug.LogError("No plant action assigned");
+                Debug.LogError("actions not assigned");
                 return;
             }
 
             ResetHandleBarAction.AddOnChangeListener(resetHandleBar, SteamVR_Input_Sources.Any);
+            AccelerateAction.AddOnChangeListener(accelerate, SteamVR_Input_Sources.Any);
+            BrakeAction.AddOnChangeListener(brake, SteamVR_Input_Sources.Any);
+            MusicAction.AddOnChangeListener(playMusic, SteamVR_Input_Sources.Any);
         }
 
         private void Start()
         {
+            m_SteerPublisher = GetComponent<RosSteerPublisher>();
+            m_SpeedPublisher = GetComponent<RosSpeedPublisher>();
+            m_HornPublisher = GetComponent<RosHornPublisher>();
             InitializeHandleBar();
         }
 
@@ -48,6 +66,13 @@ namespace TeleRikshaw.Rikshaw
             {
                 getOrientationOfVRController();
                 steerHandleBar();
+                //Debug.Log(m_SteerAngle);
+                int lsa = (int)m_LastSteerAngle;
+                int sa = (int)m_SteerAngle;
+                if(sa != lsa)
+                {
+                    m_SteerPublisher.PublishSteeringMessage(m_SteerAngle);
+                }
             }
         }
         #endregion MONOBEHAVIOUR_FUNCTIONS
@@ -75,6 +100,7 @@ namespace TeleRikshaw.Rikshaw
             Vector3 ctline = LeftController.transform.position - RightController.transform.position;
             ctline.y = 0;
             Vector3.OrthoNormalize(ref ctline, ref m_Up, ref m_ControllerForwardVector);
+            m_LastSteerAngle = m_SteerAngle;
             m_SteerAngle = Vector3.SignedAngle(m_ForwardVector, m_ControllerForwardVector, Vector3.up);
         }
 
@@ -87,6 +113,24 @@ namespace TeleRikshaw.Rikshaw
         {
             InitializeHandleBar();
         }
+
+        private void accelerate(SteamVR_Action_In action_In)
+        {
+            SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
+            m_SpeedPublisher.PublishSpeedMessage(act.GetAxis(SteamVR_Input_Sources.RightHand));
+        }
+
+        private void brake(SteamVR_Action_In action_In)
+        {
+            SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
+            m_SpeedPublisher.PublishSpeedMessage(-act.GetAxis(SteamVR_Input_Sources.LeftHand));
+        }
+
+        private void playMusic(SteamVR_Action_In action_In)
+        {
+            m_HornPublisher.PlayMusic();
+        }
+
         #endregion PRIVATE_MEMBER_FUNCTIONS
     }
 
