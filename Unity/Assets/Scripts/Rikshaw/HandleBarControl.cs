@@ -35,6 +35,11 @@ namespace TeleRikshaw.Rikshaw
         private RosSteerPublisher m_SteerPublisher;
         private RosSpeedPublisher m_SpeedPublisher;
         private RosHornPublisher m_HornPublisher;
+
+        private int updateCounter = 0;
+
+        private const float MAX_SPEED_DISPLAY = 8;
+        private const float MIN_SPEED_DISPLAY = -8;
         #endregion PRIVATE_VARIABLES
 
         #region MONOBEHAVIOUR_FUNCTIONS
@@ -69,10 +74,13 @@ namespace TeleRikshaw.Rikshaw
                 //Debug.Log(m_SteerAngle);
                 int lsa = (int)m_LastSteerAngle;
                 int sa = (int)m_SteerAngle;
-                if(sa != lsa)
+                updateCounter++;
+                if (sa != lsa && updateCounter > 10)
                 {
+                    updateCounter = 0;
                     m_SteerPublisher.PublishSteeringMessage(m_SteerAngle);
                 }
+                //System.Threading.Thread.Sleep(500);
             }
         }
         #endregion MONOBEHAVIOUR_FUNCTIONS
@@ -87,7 +95,6 @@ namespace TeleRikshaw.Rikshaw
                 ctline.y = 0; // project to horizontal plane
                 Vector3.OrthoNormalize(ref ctline, ref m_Up, ref m_ForwardVector);
                 m_ControllerInitialized = true;
-
                 // reset the rotation of the handlebar
                 transform.localRotation = Quaternion.Euler(0, 0, 0);
             }
@@ -100,6 +107,7 @@ namespace TeleRikshaw.Rikshaw
             Vector3 ctline = LeftController.transform.position - RightController.transform.position;
             ctline.y = 0;
             Vector3.OrthoNormalize(ref ctline, ref m_Up, ref m_ControllerForwardVector);
+            
             m_LastSteerAngle = m_SteerAngle;
             m_SteerAngle = Vector3.SignedAngle(m_ForwardVector, m_ControllerForwardVector, Vector3.up);
         }
@@ -117,7 +125,9 @@ namespace TeleRikshaw.Rikshaw
         private void accelerate(SteamVR_Action_In action_In)
         {
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
-            m_SpeedPublisher.PublishSpeedMessage(act.GetAxis(SteamVR_Input_Sources.RightHand));
+            float speed = act.GetAxis(SteamVR_Input_Sources.RightHand);
+            m_SpeedPublisher.PublishSpeedMessage(speed);
+            
         }
 
         private void brake(SteamVR_Action_In action_In)

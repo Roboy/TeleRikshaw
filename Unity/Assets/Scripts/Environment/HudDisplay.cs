@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using TMPro;
 
 public class HudDisplay : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TextMeshPro SpeedDisplay;
 
-    // Update is called once per frame
-    void Update()
+    public void DisplaySpeed(float speed)
     {
-        
+        if(SpeedDisplay == null)
+        {
+            return;
+        }
+
+        SpeedDisplay.text = String.Format("Speed {0:f} km/h", speed);
     }
 }
