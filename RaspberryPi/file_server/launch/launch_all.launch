@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find file_server)/launch/unity_communication.launch"/>
+	<include file="$(find file_server)/launch/raspicam.launch"/>
+    <include file="$(find file_server)/launch/subscribers.launch"/>
+</launch>
+
