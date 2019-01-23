@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+	<node name="direction_subscriber" pkg="stan_control" type="direction_subscriber.py" output="screen"/>
+	<node name="speed_subscriber" pkg="stan_control" type="speed_subscriber.py" output="screen"/>
+	<node name="camera_direction_subscriber" pkg="stan_control" type="camera_direction_subscriber.py" output="screen"/>
+	<node name="honk_subscriber" pkg="stan_control" type="honk_subscriber.py" output="screen"/>
+	<node name="sound_subscriber" pkg="stan_control" type="sound_subscriber.py" output="screen"/>
+</launch>
