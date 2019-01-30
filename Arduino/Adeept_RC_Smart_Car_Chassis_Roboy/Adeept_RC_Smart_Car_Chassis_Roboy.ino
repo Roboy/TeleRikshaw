@@ -166,40 +166,40 @@ void loop() {
 //listens to serial input --> can be manipulated with python
 void serialEvent()
 {
-   while(Serial.available()) 
-   {
-      char ch = Serial.read();
-      Serial.write(ch);
-      if (index < MaxChars && isAlpha(ch)){
-        ctrl = ch;
-        delay(200);
+    while(Serial.available())
+    {
+      int order = Serial.read();
+      Serial.println("Order number: ");
+      Serial.println(order);
+
+      switch(order){
+        case 0:
+          Serial.println("Hello Test");
+          break;
+        case 1:
+          int direction = Serial.read();
+          carDirectionD(direction);
+          break;
+        case 2:
+          int speed = Serial.read();
+          speedS(speed);
+          break;
+        case 3:
+          int cam_direction = Serial.read();
+          camDirectionC(cam_direction);
+          break;
+        case 4:
+          int buzzer = Serial.read();
+          buzzB(buzzer);
+          break;
+        case 5:
+          int jinglebells = Serial.read();
+          jingleBellsJ(jinglebells);
+          break;
+        default:
+          break;
       }
-      else if(index < MaxChars && isDigit(ch)) { 
-            strValue[index++] = ch; 
-      } else { 
-            strValue[index] = 0;
-            serialInt = atoi(strValue);
-            index = 0;
-            switch (ctrl) {
-              case 'D': carDirectionD(serialInt); break;
-              case 'C': camDirectionC(serialInt); break;
-              case 'B': buzzB(serialInt); break;
-              case 'S': speedS(serialInt); break;
-              case 'J': jingleBellsJ(serialInt); break;
-              default: break;
-            }
-      }
-      /*
-      char ch = Serial.read();
-      Serial.write(ch);
-      if(index < MaxChars && isDigit(ch)) { 
-            strValue[index++] = ch; 
-      } else { 
-            strValue[index] = 0;
-            serialInt = atoi(strValue);
-            index = 0;
-            carDirectionD(serialInt);
-      }*/
+    }
    }
 }
 
