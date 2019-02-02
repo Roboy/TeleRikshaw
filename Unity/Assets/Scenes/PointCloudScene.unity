@@ -406,6 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383366297}
   - component: {fileID: 1383366296}
+  - component: {fileID: 1383366298}
   m_Layer: 0
   m_Name: PointCloudBot
   m_TagString: Untagged
@@ -442,3 +443,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1383366298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383366295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8957c89086ccf44cbd058a52ec5bd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RgbMessageNumber: 0
+  depthMessageNumber: 0

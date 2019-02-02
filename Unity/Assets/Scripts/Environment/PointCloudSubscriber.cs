@@ -6,7 +6,7 @@ using RosSharp.RosBridgeClient.Messages.Sensor;
 
 public class PointCloudSubscriber : MonoBehaviour
 {
-    public RosSocket RosSocket;
+    private RosSocket RosSocket;
 
     public int RgbMessageNumber = 0;
     public int depthMessageNumber = 0;
