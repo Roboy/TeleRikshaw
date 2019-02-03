@@ -19,6 +19,8 @@ namespace TeleRikshaw.Rikshaw
         public SteamVR_Action_Single AccelerateAction;
         public SteamVR_Action_Single BrakeAction;
 
+        public HudDisplay Hud;
+
         #endregion // PUBLIC_VARIABLES
 
         #region PRIVATE_VARIABLES
@@ -127,13 +129,16 @@ namespace TeleRikshaw.Rikshaw
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
             float speed = act.GetAxis(SteamVR_Input_Sources.RightHand);
             m_SpeedPublisher.PublishSpeedMessage(speed);
-            
+            Hud.DisplaySpeed((int)(speed*MAX_SPEED_DISPLAY));
         }
 
         private void brake(SteamVR_Action_In action_In)
         {
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
-            m_SpeedPublisher.PublishSpeedMessage(-act.GetAxis(SteamVR_Input_Sources.LeftHand));
+            float speed = act.GetAxis(SteamVR_Input_Sources.LeftHand);
+            m_SpeedPublisher.PublishSpeedMessage(-speed);
+            Debug.Log(-speed);
+            Hud.DisplaySpeed((int)(-speed*MIN_SPEED_DISPLAY));
         }
 
         private void playMusic(SteamVR_Action_In action_In)
