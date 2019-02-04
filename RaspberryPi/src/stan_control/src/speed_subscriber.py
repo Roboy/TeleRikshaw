@@ -2,16 +2,27 @@
 import rospy
 import serial
 from std_msgs.msg import String
+import math
+
+speed_command = 255
+rpm = 0.0
+speed_mps = 0.0
+speed_kmh = 0.0
+wheel_radius = 0.03
 
 arduinoSerialData =  serial.Serial('/dev/ttyACM0', 9600)
+pub = rospy.Publisher('stan_speed', String, queue_size=10)
 
 def callback(data):
-    # TODO: write to serial port "S" + 0 ... 510
     arduinoSerialData.write(data.data + "\n")
-    #rospy.loginfo(str(data.data) + "\n")
+    speed_command = int(data.data[1:])
+    rpm = (200.0/255.0) * float(speed_command) - 200.0;
+    # velocity in m/s = 2πrRPM/60
+    speed_mps = (2 * math.pi * wheel_radius * rpm) / 60
+    speed_kmh = speed_mps * 3.6
+    pub.publish(speed_kmh)
     
 def speed_subscriber():
-
     rospy.init_node('speed_subscriber', anonymous=True)
     rospy.Subscriber("speed", String, callback)
     rospy.spin()
