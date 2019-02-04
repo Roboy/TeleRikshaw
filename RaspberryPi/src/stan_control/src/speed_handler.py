@@ -28,4 +28,7 @@ def speed_handler():
     rospy.spin()
 
 if __name__ == '__main__':
-    speed_handler()
+    try:
+        speed_handler()
+    except rospy.ROSInterruptException:
+        pass
