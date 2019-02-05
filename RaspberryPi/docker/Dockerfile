@@ -11,11 +11,6 @@ RUN /bin/bash -c 'source /opt/ros/kinetic/setup.bash'
 
 # Create catkin workspace
 RUN mkdir -p catkin_ws/src
-#RUN /bin/bash -c 'catkin_init_workspace'
-#WORKDIR /home/ros/catkin_ws
-#RUN /bin/bash -c 'source devel/setup.bash'
-#RUN /bin/bash -c 'catkin_make'
-#RUN roscore
 
 # Clone TeleRickshaw repo
 WORKDIR /home/ros
@@ -29,9 +24,12 @@ RUN mv /home/ros/repo/RaspberryPi/src/ /home/ros/catkin_ws/src
 WORKDIR /home/ros/catkin_ws
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/ros/catkin_ws; catkin_make'
 RUN /bin/bash -c 'source devel/setup.bash'
+RUN /bin/bash -c 'echo "source /home/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc; source ~/.bashrc'
 
 # Configure ROS master
 RUN export ROS_MASTER_URI=0.0.0.0:11311
 
-#CMD roslaunch file_server unity_communication.launch
+# does not work, no idea why???
+#CMD roslaunch file_server unity_communication.launch 
+
 
