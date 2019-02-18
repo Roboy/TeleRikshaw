@@ -310,7 +310,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/telerikshaw/in/resethandlebar"
+                     "output" : "/actions/telerikshaw/in/resetsceneposition"
                   }
                },
                "mode" : "button",
