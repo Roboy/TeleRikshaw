@@ -166,7 +166,30 @@ void loop() {
 //listens to serial input --> can be manipulated with python
 void serialEvent()
 {
-    while(Serial.available())
+    while(Serial.available()) 
+   {
+      char ch = Serial.read();
+      Serial.write(ch);
+      if (index < MaxChars && isAlpha(ch)){
+        ctrl = ch;
+        delay(200);
+          else if(index < MaxChars && isDigit(ch)) { 
+            strValue[index++] = ch; 
+      } else { 
+            strValue[index] = 0;
+            serialInt = atoi(strValue);
+            index = 0;
+            switch (ctrl) {
+              case 'D': carDirectionD(serialInt); break;
+              case 'C': camDirectionC(serialInt); break;
+              case 'B': buzzB(serialInt); break;
+              case 'S': speedS(serialInt); break;
+              case 'J': jingleBellsJ(serialInt); break;
+              default: break;
+            }
+      }
+      /*
+     while(Serial.available())
     {
       int order = Serial.read();
       Serial.println("Order number: ");
@@ -198,9 +221,7 @@ void serialEvent()
           break;
         default:
           break;
-      }
+      }*/
     }
    }
 }
-
- 
