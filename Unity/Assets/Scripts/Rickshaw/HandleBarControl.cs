@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using Valve.VR;
-using Valve.VR.InteractionSystem;
+using TeleRickshaw.Game;
 
-namespace TeleRikshaw.Rikshaw
+namespace TeleRickshaw.Rickshaw
 {
-    [RequireComponent(typeof(RosSpeedPublisher))]
-    [RequireComponent(typeof(RosSteerPublisher))]
-    [RequireComponent(typeof(RosHornPublisher))]
     public class HandleBarControl : MonoBehaviour
     {
 
@@ -34,12 +31,6 @@ namespace TeleRikshaw.Rikshaw
 
         private Vector3 m_Up = new Vector3(0, 1, 0);
 
-        private RosSteerPublisher m_SteerPublisher;
-        private RosSpeedPublisher m_SpeedPublisher;
-        private RosHornPublisher m_HornPublisher;
-        private RosRickshawSpeedPublisher m_RosRikshawSpeedPublisher;
-        private RosRickshawSteerPublisher m_RosRikshawSteerPublisher;
-
         private int updateCounter = 0;
 
         private const float MAX_SPEED_DISPLAY = 8;
@@ -49,7 +40,7 @@ namespace TeleRikshaw.Rikshaw
         #region MONOBEHAVIOUR_FUNCTIONS
         private void OnEnable()
         {
-            if (ResetHandleBarAction == null || AccelerateAction == null || BrakeAction == null)
+            if (ResetHandleBarAction == null || AccelerateAction == null || BrakeAction == null || MusicAction == null)
             {
                 Debug.LogError("actions not assigned");
                 return;
@@ -63,11 +54,6 @@ namespace TeleRikshaw.Rikshaw
 
         private void Start()
         {
-            m_SteerPublisher = GetComponent<RosSteerPublisher>();
-            m_SpeedPublisher = GetComponent<RosSpeedPublisher>();
-            m_HornPublisher = GetComponent<RosHornPublisher>();
-            m_RosRikshawSpeedPublisher = GetComponent<RosRickshawSpeedPublisher>();
-            m_RosRikshawSteerPublisher = GetComponent<RosRickshawSteerPublisher>();
             InitializeHandleBar();
         }
 
@@ -84,10 +70,7 @@ namespace TeleRikshaw.Rikshaw
                 if (sa != lsa && updateCounter > 10)
                 {
                     updateCounter = 0;
-                    m_SteerPublisher.PublishSteeringMessage(m_SteerAngle);
-                    m_RosRikshawSteerPublisher.PublishSteeringMessage(m_SteerAngle);
                 }
-                //System.Threading.Thread.Sleep(500);
             }
         }
         #endregion MONOBEHAVIOUR_FUNCTIONS
@@ -103,7 +86,7 @@ namespace TeleRikshaw.Rikshaw
                 Vector3.OrthoNormalize(ref ctline, ref m_Up, ref m_ForwardVector);
                 m_ControllerInitialized = true;
                 // reset the rotation of the handlebar
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                transform.localRotation = Quaternion.identity;
             }
         }
         #endregion PUBLIC_MEMBER_FUNCTIONS
@@ -133,23 +116,16 @@ namespace TeleRikshaw.Rikshaw
         {
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
             float speed = act.GetAxis(SteamVR_Input_Sources.RightHand);
-            m_SpeedPublisher.PublishSpeedMessage(speed);
-            m_RosRikshawSpeedPublisher.PublishSpeedMessage(speed);
-            //Hud.DisplaySpeed((int)(speed*MAX_SPEED_DISPLAY));
         }
 
         private void brake(SteamVR_Action_In action_In)
         {
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
             float speed = act.GetAxis(SteamVR_Input_Sources.LeftHand);
-            m_SpeedPublisher.PublishSpeedMessage(-speed);
-            m_RosRikshawSpeedPublisher.PublishSpeedMessage(-speed);
-            //Hud.DisplaySpeed((int)(-speed*MIN_SPEED_DISPLAY));
         }
 
         private void playMusic(SteamVR_Action_In action_In)
         {
-            m_HornPublisher.PlayMusic();
         }
 
         #endregion PRIVATE_MEMBER_FUNCTIONS

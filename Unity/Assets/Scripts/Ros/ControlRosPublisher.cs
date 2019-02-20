@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RosSharp.RosBridgeClient;
 
-namespace TeleRikshaw.Rikshaw
+namespace TeleRickshaw.Rickshaw
 {
     public class ControlRosPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
     {

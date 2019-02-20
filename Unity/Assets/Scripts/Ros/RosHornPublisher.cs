@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using RosSharp.RosBridgeClient;
 
-namespace TeleRikshaw.Rikshaw
+namespace TeleRickshaw.Rickshaw
 {
     public class RosHornPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
     {

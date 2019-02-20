@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using RosSharp.RosBridgeClient;
 
-namespace TeleRikshaw.Rikshaw
+namespace TeleRickshaw.Rickshaw
 {
     public class RosRickshawSpeedPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Geometry.Twist>
     {
