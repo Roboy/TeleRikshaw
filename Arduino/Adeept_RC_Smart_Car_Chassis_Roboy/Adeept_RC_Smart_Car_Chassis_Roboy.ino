@@ -1,5 +1,8 @@
 #include <SPI.h>
 #include <Servo.h>
+#include <ros.h>
+#include <std_msgs/Int16.h>
+#include <std_msgs/Float32.h>
 
 Servo dirServo;                                               // defines servo to control turning of car
 int dirServoPin = 2;                                          // defines pin for signal line of the last servo
@@ -36,11 +39,47 @@ char notes[] = "eeeeeeegcde fffffeeeeddedg";
 int beats[] = { 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2};
 int tempo = 300;
 
+float wheel_radius = 0.03;
+float rpm = 0.0;
+float speed_mps = 0.0;
+float speed_kmh = 0.0;
+const float Pi = 3.14159;
+
+//Instatiate node handle for ROSserial communication
+ros::NodeHandle nh;
+
+//ROS publisher
+std_msgs::Float32 speed_msg;
+ros::Publisher pub_speed("speed_stan", &speed_msg);
+
+//Subscriber callback functions
+void directionCb( const std_msgs::Int16& msg){
+  carDirectionD(msg.data);
+}
+
+void speedCb( const std_msgs::Int16& msg){
+  speedS(msg.data);
+  // calculate speed in kmh
+  rpm = (200.0/255.0) * msg.data - 200.0;
+  speed_mps = (2.0 * Pi * wheel_radius * rpm) / 60.0;
+  speed_kmh = speed_mps * 3.6;
+  speed_msg.data = speed_kmh;
+  pub_speed.publish( &speed_msg);
+}
+
+void musicCb( const std_msgs::Int16& msg){
+  jingleBellsJ(msg.data);
+}
+
+//ROS subscriber
+ros::Subscriber<std_msgs::Int16> sub_direction("direction_car", &directionCb );
+ros::Subscriber<std_msgs::Int16> sub_speed("speed_car", &speedCb );
+ros::Subscriber<std_msgs::Int16> sub_music("music", &musicCb );
 
 // car will run this instruction once when turned on 
 void setup() {
-  Serial.begin(9600);
-
+  //Serial.begin(9600);
+  
   dirServo.attach(dirServoPin);                               // attaches the servo on servoDirPin to the servo object
   dirServo.write(90-dirServoOffset);                                         // moves dirServo to 90 deg position (center)
   ultrasonicServo.attach(ultrasonicPin);                      // attaches the servo on ultrasonicPin to the servo object
@@ -56,6 +95,14 @@ void setup() {
   pinMode(BPin, OUTPUT);                                      // sets BPin to output mode
   pinMode(trigPin, OUTPUT);                                   // sets trigPin to output mode
   pinMode(echoPin, INPUT);                                    // sets echoPin to input mode
+
+  //initialize ROS node handle and subscribers
+  nh.initNode();
+  nh.subscribe(sub_direction);
+  nh.subscribe(sub_speed);
+  nh.subscribe(sub_music);
+  nh.advertise(pub_speed);
+  
 }
 
 // function to change car direction
@@ -161,67 +208,8 @@ void LEDloop() {
 void loop() {  
    // loops though 7 LED colors for awesome looks
    LEDloop();
+   nh.spinOnce();
+   delay(1);
 }
 
-//listens to serial input --> can be manipulated with python
-void serialEvent()
-{
-    while(Serial.available()) 
-   {
-      char ch = Serial.read();
-      Serial.write(ch);
-      if (index < MaxChars && isAlpha(ch)){
-        ctrl = ch;
-        delay(200);
-          else if(index < MaxChars && isDigit(ch)) { 
-            strValue[index++] = ch; 
-      } else { 
-            strValue[index] = 0;
-            serialInt = atoi(strValue);
-            index = 0;
-            switch (ctrl) {
-              case 'D': carDirectionD(serialInt); break;
-              case 'C': camDirectionC(serialInt); break;
-              case 'B': buzzB(serialInt); break;
-              case 'S': speedS(serialInt); break;
-              case 'J': jingleBellsJ(serialInt); break;
-              default: break;
-            }
-      }
-      /*
-     while(Serial.available())
-    {
-      int order = Serial.read();
-      Serial.println("Order number: ");
-      Serial.println(order);
-
-      switch(order){
-        case 0:
-          Serial.println("Hello Test");
-          break;
-        case 1:
-          int direction = Serial.read();
-          carDirectionD(direction);
-          break;
-        case 2:
-          int speed = Serial.read();
-          speedS(speed);
-          break;
-        case 3:
-          int cam_direction = Serial.read();
-          camDirectionC(cam_direction);
-          break;
-        case 4:
-          int buzzer = Serial.read();
-          buzzB(buzzer);
-          break;
-        case 5:
-          int jinglebells = Serial.read();
-          jingleBellsJ(jinglebells);
-          break;
-        default:
-          break;
-      }*/
-    }
-   }
-}
+ 
