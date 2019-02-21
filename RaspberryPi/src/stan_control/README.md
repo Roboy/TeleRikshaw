@@ -1,19 +1,14 @@
 # Package `stan_control`
 
 ## Description
-This package accomplishes the processing of the control commands between Unity and ROS for the RC car.
+Together with the [Arduino code](https://github.com/Roboy/TeleRikshaw/tree/devel/Arduino/Adeept_RC_Smart_Car_Chassis_Roboy) this package accomplishes the processing of the control commands between Unity and ROS for the RC car.
 
 Unity sends RC car commands to the RaspberryPi by publishing to the following topics via [rosbridge_server](http://wiki.ros.org/rosbridge_server) and [ROS#](https://github.com/siemens/ros-sharp):
 * `direction_car`
 * `speed_car`
 * `music`
 
-There is one ROS node subscribing to each topic and writing the corresponding command to the serial port of the Arduino:
-* [`direction_subscriber`](https://github.com/Roboy/TeleRikshaw/blob/devel/RaspberryPi/src/stan_control/src/direction_subscriber.py)
-* [`sound_subscriber`](https://github.com/Roboy/TeleRikshaw/blob/devel/RaspberryPi/src/stan_control/src/sound_subscriber.py)
-* [`speed_handler`](https://github.com/Roboy/TeleRikshaw/blob/devel/RaspberryPi/src/stan_control/src/speed_handler.py)  
-
-The node `speed_handler` additionally calculates and publishes the speed of the RC car.
+With [rosserial_arduino](http://wiki.ros.org/rosserial_arduino) and [rosserial_python](http://wiki.ros.org/rosserial_python) the ROS master on the RaspberryPi communicates with the Arduino. Thus, the Arduino controls its respective ports and the RC car behaves accordingly.
 
 Moreover, this package contains a launch file to publish and convert the video stream as ROS topic `/raspicam_node/image_repub/compressed`.
 
