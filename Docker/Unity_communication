@@ -28,5 +28,6 @@ RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/ros/catkin_ws; catkin_
 RUN export ROS_MASTER_URI=0.0.0.0:11311
 
 # does not work, no idea why???
-CMD [ "rosrun", "rickshaw_control speed_handler" ]
+CMD [ "roslaunch", "file_server unity_communication.launch" ]
+
 
