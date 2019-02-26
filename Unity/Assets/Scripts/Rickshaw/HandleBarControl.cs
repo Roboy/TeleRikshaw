@@ -26,7 +26,6 @@ namespace TeleRickshaw.Rickshaw
         private Vector3 m_ForwardVector;
         private Vector3 m_ControllerForwardVector;
 
-        private float m_LastSteerAngle = 0;
         private float m_SteerAngle = 0;
 
         private Vector3 m_Up = new Vector3(0, 1, 0);
@@ -46,10 +45,10 @@ namespace TeleRickshaw.Rickshaw
                 return;
             }
 
-            ResetHandleBarAction.AddOnChangeListener(resetHandleBar, SteamVR_Input_Sources.Any);
-            AccelerateAction.AddOnChangeListener(accelerate, SteamVR_Input_Sources.Any);
-            BrakeAction.AddOnChangeListener(brake, SteamVR_Input_Sources.Any);
-            MusicAction.AddOnChangeListener(playMusic, SteamVR_Input_Sources.Any);
+            ResetHandleBarAction.AddOnChangeListener(ResetHandleBar, SteamVR_Input_Sources.Any);
+            AccelerateAction.AddOnChangeListener(Accelerate, SteamVR_Input_Sources.Any);
+            BrakeAction.AddOnChangeListener(Brake, SteamVR_Input_Sources.Any);
+            MusicAction.AddOnChangeListener(PlayMusic, SteamVR_Input_Sources.Any);
         }
 
         private void Start()
@@ -57,21 +56,20 @@ namespace TeleRickshaw.Rickshaw
             InitializeHandleBar();
         }
 
-        void Update()
+        private void Update()
         {
-            if (m_ControllerInitialized)
-            {
-                getOrientationOfVRController();
-                steerHandleBar();
-                //Debug.Log(m_SteerAngle);
-                int lsa = (int)m_LastSteerAngle;
-                int sa = (int)m_SteerAngle;
-                updateCounter++;
-                if (sa != lsa && updateCounter > 10)
-                {
-                    updateCounter = 0;
-                }
-            }
+            if (!m_ControllerInitialized) return;
+
+            //  calculate the orientation of the real handlebar
+            GetOrientationOfVrController();
+
+            //  steer the virtual handlebar
+            SteerHandleBar();
+            //Debug.Log(m_SteerAngle);
+
+            //  update the state of steer in RickshawStateManager
+            RickshawStateManager.Instance.VirtualRickshawSteer = new Vector3(0, 0,Mathf.Deg2Rad * m_SteerAngle);
+
         }
         #endregion MONOBEHAVIOUR_FUNCTIONS
 
@@ -92,40 +90,47 @@ namespace TeleRickshaw.Rickshaw
         #endregion PUBLIC_MEMBER_FUNCTIONS
 
         #region PRIVATE_MEMBER_FUNCTIONS
-        private void getOrientationOfVRController()
+        private void GetOrientationOfVrController()
         {
             Vector3 ctline = LeftController.transform.position - RightController.transform.position;
             ctline.y = 0;
             Vector3.OrthoNormalize(ref ctline, ref m_Up, ref m_ControllerForwardVector);
             
-            m_LastSteerAngle = m_SteerAngle;
             m_SteerAngle = Vector3.SignedAngle(m_ForwardVector, m_ControllerForwardVector, Vector3.up);
         }
 
-        private void steerHandleBar()
+        private void SteerHandleBar()
         {
             transform.localRotation = Quaternion.Euler(new Vector3(0, m_SteerAngle, 0));
         }
         
-        private void resetHandleBar(SteamVR_Action_In actionIn)
+        private void ResetHandleBar(SteamVR_Action_In actionIn)
         {
             InitializeHandleBar();
         }
 
-        private void accelerate(SteamVR_Action_In action_In)
+        private void Accelerate(SteamVR_Action_In action_In)
         {
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
             float speed = act.GetAxis(SteamVR_Input_Sources.RightHand);
+
+            //  update the state of speed in RickshawStateManager
+            RickshawStateManager.Instance.VirtualRickshawSpeed = new Vector3(speed, 0, 0);
         }
 
-        private void brake(SteamVR_Action_In action_In)
+        private void Brake(SteamVR_Action_In action_In)
         {
             SteamVR_Action_Single act = (SteamVR_Action_Single)action_In;
             float speed = act.GetAxis(SteamVR_Input_Sources.LeftHand);
+
+            //  update the state of speed in RickshawStateManager
+            //  !!brake means set the speed to 0!!
+            RickshawStateManager.Instance.VirtualRickshawSpeed = new Vector3(0, 0, 0);
         }
 
-        private void playMusic(SteamVR_Action_In action_In)
+        private void PlayMusic(SteamVR_Action_In action_In)
         {
+            RickshawStateManager.Instance.Music = true;
         }
 
         #endregion PRIVATE_MEMBER_FUNCTIONS

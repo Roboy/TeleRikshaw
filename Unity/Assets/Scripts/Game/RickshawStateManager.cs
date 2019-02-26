@@ -7,16 +7,13 @@ namespace TeleRickshaw.Game
     {
         protected RickshawStateManager() { }
 
-        public Vector3 VirtualRickshawSpeed;
-        public Vector3 VirtualRickshawSteer;
+        public Vector3 VirtualRickshawSpeed { get; set; }
+        public Vector3 VirtualRickshawSteer { get; set; }
 
-        public bool horn;
-        public bool music;
+        public bool Horn { get; set; }
+        public bool Music { get; set; }
 
-
-
-        public Vector3 RealRickshawSpeed;
-        public Vector3 RealRickshawSteer;
+        public Vector3 RealRickshawSpeed { get; set; }
+        public Vector3 RealRickshawSteer { get; set; }
     }
-
 }

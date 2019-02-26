@@ -1,28 +1,49 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using RosSharp.RosBridgeClient;
+using RosSharp.RosBridgeClient.Messages.Standard;
+using TeleRickshaw.Game;
 
 namespace TeleRickshaw.Rickshaw
 {
-    public class RosSpeedPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
+    public class RosSpeedPublisher : Publisher<String>
     {
         private const string SPEED_CHAR = "S";
         private const float MIN_SPEED = 0;
         private const float MAX_SPEED = 510;
         private const float ZERO_SPEED = 255;
 
+        private Coroutine publishCoroutine = null;
+
+        public float PublishPeriod = 0.3f;
+
         protected override void Start()
         {
             base.Start();
+
+            if (publishCoroutine == null)
+            {
+                publishCoroutine = StartCoroutine(PublishSpeedMessage());
+            }
         }
 
-        public void PublishSpeedMessage(float speed)
+        private IEnumerator PublishSpeedMessage()
         {
-            int spd = (int)Mathf.Clamp(ZERO_SPEED + (speed * 254), 0, 510);
+            while (true)
+            {
+                int spd = (int)Mathf.Clamp(ZERO_SPEED + (RickshawStateManager.Instance.VirtualRickshawSpeed.x * 254), MIN_SPEED, MAX_SPEED);
+                string msgString = SPEED_CHAR + spd;
+                String msg = new String(msgString);
+                Publish(msg);
 
-            string msgString = SPEED_CHAR + spd.ToString();
+                yield return new WaitForSeconds(PublishPeriod);
+            }
+            
+        }
 
-            RosSharp.RosBridgeClient.Messages.Standard.String msg = new RosSharp.RosBridgeClient.Messages.Standard.String(msgString);
-            Publish(msg);
+        public void StopPublish()
+        {
+            StopCoroutine(publishCoroutine);
         }
     }
 }
