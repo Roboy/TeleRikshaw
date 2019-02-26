@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace TeleRikshaw.Environment
+namespace TeleRickshaw.Environment
 {
     public class StreamVideo : MonoBehaviour
     {

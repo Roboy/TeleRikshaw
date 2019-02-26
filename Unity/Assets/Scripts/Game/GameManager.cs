@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Valve.VR;
 
-namespace TeleRikshaw.Game
+namespace TeleRickshaw.Game
 {
     public class GameManager : MonoBehaviour
     {
