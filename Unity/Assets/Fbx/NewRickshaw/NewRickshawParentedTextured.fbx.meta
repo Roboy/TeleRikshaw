@@ -1,0 +1,257 @@
+fileFormatVersion: 2
+guid: 428666c1fc466fd4485a352600d3ce9f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: bottomBase
+    100002: cushion
+    100004: dashboard
+    100006: handleBar
+    100008: leftBase
+    100010: leftEngine
+    100012: leftPropeller
+    100014: mainPropeller
+    100016: //RootNode
+    100018: rightEngine
+    100020: rightMountPoint
+    100022: rightPropeller
+    100024: chasis
+    400000: bottomBase
+    400002: cushion
+    400004: dashboard
+    400006: handleBar
+    400008: leftBase
+    400010: leftEngine
+    400012: leftPropeller
+    400014: mainPropeller
+    400016: //RootNode
+    400018: rightEngine
+    400020: rightMountPoint
+    400022: rightPropeller
+    400024: chasis
+    2100000: ChasisMaterial
+    2100002: MountPointMaterial
+    2100004: EngineBaseMaterial
+    2100006: EngineConnectorMaterial
+    2100008: EngineMaterial
+    2100010: EngineArmMaterial
+    2100012: PropellerBaseMaterial
+    2100014: PropellerBladesMaterial
+    2100016: BottomBaseMaterial
+    2100018: BottomNozzleMaterial
+    2100020: BottomHoverEngineMaterial
+    2100022: MainPropellerBaseMaterial
+    2100024: MainPropellerNozzleMaterial
+    2100026: CushionMaterial
+    2100028: DashboardMainMaterial
+    2100030: DashboardSecondaryMaterial
+    2100032: HandleBarMaterial
+    2300000: bottomBase
+    2300002: cushion
+    2300004: dashboard
+    2300006: handleBar
+    2300008: leftBase
+    2300010: leftEngine
+    2300012: leftPropeller
+    2300014: mainPropeller
+    2300016: //RootNode
+    2300018: rightEngine
+    2300020: rightMountPoint
+    2300022: rightPropeller
+    2300024: chasis
+    3300000: bottomBase
+    3300002: cushion
+    3300004: dashboard
+    3300006: handleBar
+    3300008: leftBase
+    3300010: leftEngine
+    3300012: leftPropeller
+    3300014: mainPropeller
+    3300016: //RootNode
+    3300018: rightEngine
+    3300020: rightMountPoint
+    3300022: rightPropeller
+    3300024: chasis
+    4300000: chasis
+    4300002: leftEngine
+    4300004: leftBase
+    4300006: leftPropeller
+    4300008: rightMountPoint
+    4300010: rightEngine
+    4300012: rightPropeller
+    4300014: bottomBase
+    4300016: mainPropeller
+    4300018: cushion
+    4300020: dashboard
+    4300022: handleBar
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomBaseMaterial
+    second: {fileID: 2100000, guid: 73536e0027f05b04caf10234856ceb81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomHoverEngineMaterial
+    second: {fileID: 2100000, guid: 9d8d2f08d996d9b439f5b80513a51b3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomNozzleMaterial
+    second: {fileID: 2100000, guid: 4031e4bc5273e8b43b735ddc8532421d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChasisMaterial
+    second: {fileID: 2100000, guid: 3bcac22fa4164de408d1e25340be8a4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CushionMaterial
+    second: {fileID: 2100000, guid: 0dae7d41e39dc1f4689475388aa037ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DashboardMainMaterial
+    second: {fileID: 2100000, guid: 39055da2e917b5946bcaad1975479547, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DashboardSecondaryMaterial
+    second: {fileID: 2100000, guid: 8c77df9e00d3997499ff55b195f0c198, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EngineArmMaterial
+    second: {fileID: 2100000, guid: 1b23cf04575de514eb03522ecfc37b99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EngineBaseMaterial
+    second: {fileID: 2100000, guid: 45daff9bec4a5454b8a215ef267df474, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EngineConnectorMaterial
+    second: {fileID: 2100000, guid: 6dc5eb20b4c22dc4ab33992543150a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EngineMaterial
+    second: {fileID: 2100000, guid: e02ca5942bfbd9f4284e0fef72c0bade, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HandleBarMaterial
+    second: {fileID: 2100000, guid: cd737675dd8b6e54a9254189117b1b1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MainPropellerBaseMaterial
+    second: {fileID: 2100000, guid: dd82cf9b6515e0c4186c2df58d5a9a19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MainPropellerNozzleMaterial
+    second: {fileID: 2100000, guid: ce1750d9b14d06a478d337c350a0fcd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MountPointMaterial
+    second: {fileID: 2100000, guid: 07f31b7af30c55a44a4878d675661af1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PropellerBaseMaterial
+    second: {fileID: 2100000, guid: c8a700e6baae8d94882a5fc14f3e6fa3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PropellerBladesMaterial
+    second: {fileID: 2100000, guid: ee59fba1620573845aec688015ade869, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
