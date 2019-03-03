@@ -4,30 +4,31 @@ WORKDIR /home/ros
 
 # Install system libraries
 RUN apt-get update && \
-    apt-get install -y ros-kinetic-rosbridge-server git apt-utils net-tools
+    apt-get install -y ros-kinetic-rosserial-arduino ros-kinetic-rosserial git apt-utils net-tools
 
 # Initialize ROS and create catkin workspace
 RUN /bin/bash -c 'source /opt/ros/kinetic/setup.bash' && \
     mkdir -p catkin_ws/src
 
 # Clone TeleRickshaw repo
-WORKDIR /home/ros
+# WORKDIR /home/ros
 RUN mkdir /home/ros/repo && \
     git clone https://github.com/Roboy/TeleRikshaw.git repo
 WORKDIR /home/ros/repo
 RUN git checkout devel && \
-    mv /home/ros/repo/RaspberryPi/src/ /home/ros/catkin_ws/src
+    mv /home/ros/repo/RaspberryPi/src/* /home/ros/catkin_ws/src
 
 # build catkin workspace
 WORKDIR /home/ros/catkin_ws
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/ros/catkin_ws; catkin_make' && \
-    /bin/bash -c 'source devel/setup.bash' && \
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; catkin_make' && \
+    /bin/bash -c '. devel/setup.bash' && \
     /bin/bash -c 'echo "source /home/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc; source ~/.bashrc'
+
 
 # Configure ROS master
 RUN export ROS_MASTER_URI=0.0.0.0:11311
 
 # does not work, no idea why???
-CMD [ "roslaunch", "stan_control subscribers.launch" ]
+#CMD [ "roslaunch", "stan_control subscribers.launch" ]
 
 
