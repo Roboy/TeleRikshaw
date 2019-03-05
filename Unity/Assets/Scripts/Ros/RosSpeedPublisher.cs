@@ -6,7 +6,7 @@ using TeleRickshaw.Game;
 
 namespace TeleRickshaw.Rickshaw
 {
-    public class RosSpeedPublisher : Publisher<String>
+    public class RosSpeedPublisher : Publisher<Int16>
     {
         private const string SPEED_CHAR = "S";
         private const float MIN_SPEED = 0;
@@ -32,8 +32,7 @@ namespace TeleRickshaw.Rickshaw
             while (true)
             {
                 int spd = (int)Mathf.Clamp(ZERO_SPEED + (RickshawStateManager.Instance.VirtualRickshawSpeed.x * 254), MIN_SPEED, MAX_SPEED);
-                string msgString = SPEED_CHAR + spd;
-                String msg = new String(msgString);
+                Int16 msg = new Int16(spd);
                 Publish(msg);
 
                 yield return new WaitForSeconds(PublishPeriod);

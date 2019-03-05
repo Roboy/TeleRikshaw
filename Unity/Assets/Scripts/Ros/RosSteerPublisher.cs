@@ -6,7 +6,7 @@ using TeleRickshaw.Game;
 
 namespace TeleRickshaw.Rickshaw
 {
-    public class RosSteerPublisher : Publisher<String>
+    public class RosSteerPublisher : Publisher<Int16>
     {
         private const string STEER_CHAR = "D";
         private const float MIN_ANGLE = 40;
@@ -31,9 +31,8 @@ namespace TeleRickshaw.Rickshaw
         {
             while (true)
             {
-                int spd = (int)Mathf.Clamp(FORWARD_ANGLE + (RickshawStateManager.Instance.VirtualRickshawSpeed.x * 50), MIN_ANGLE, MAX_ANGLE);
-                string msgString = STEER_CHAR + spd;
-                String msg = new String(msgString);
+                int angle = (int)Mathf.Clamp(FORWARD_ANGLE + (RickshawStateManager.Instance.VirtualRickshawSteer.z * 50), MIN_ANGLE, MAX_ANGLE);
+                Int16 msg = new Int16(angle);
                 Publish(msg);
 
                 yield return new WaitForSeconds(PublishPeriod);

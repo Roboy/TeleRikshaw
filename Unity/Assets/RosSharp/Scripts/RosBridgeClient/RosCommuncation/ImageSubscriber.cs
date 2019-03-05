@@ -48,7 +48,7 @@ namespace RosSharp.RosBridgeClient
         {
             texture2D.LoadImage(imageData);
             texture2D.Apply();
-            meshRenderer.material.SetTexture("_MainTex", texture2D);
+            meshRenderer.material.SetTexture("_BaseColorMap", texture2D);
             isMessageReceived = false;
         }
 
