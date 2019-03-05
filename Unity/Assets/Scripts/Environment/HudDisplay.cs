@@ -1,51 +1,98 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
+using TeleRickshaw.Game;
 
-public class HudDisplay : MonoBehaviour
+namespace TeleRickshaw.Rickshaw
 {
-    public TextMeshPro SpeedDisplay;
-    public TextMeshPro BatteryDisplay;
-
-    public void DisplaySpeed(string speed)
+    public class HudDisplay : MonoBehaviour
     {
-        if(SpeedDisplay == null)
+        public float UpdateInterval = 0.1f;
+
+        public TextMeshPro SpeedDisplay;
+        public TextMeshPro BatteryDisplay;
+
+        private Coroutine UpdateHUDCoroutine = null;
+
+        private float BatteryLevel;
+        private Vector3 RickshawSpeed;
+
+        private void Start()
         {
-            return;
+            if (SpeedDisplay == null || BatteryDisplay == null)
+            {
+                return;
+            }
+            if(UpdateHUDCoroutine == null)
+            {
+                UpdateHUDCoroutine = StartCoroutine(UpdateHUD());
+            }
         }
 
-
-        SpeedDisplay.text = "Speed " + speed + " km/h";
-    }
-
-    public void DisplayBattery(string battery)
-    {
-        try
+        public void DisplaySpeed(Vector3 speed)
         {
-            int batteryLevel = int.Parse(battery);
-            if (batteryLevel > 75)
+            if (SpeedDisplay == null)
+            {
+                return;
+            }
+            Debug.Log(speed);
+            if (speed == null)
+            {
+                SpeedDisplay.text = String.Format("Speed: {0:F1} km/h", 2.6);
+                return;
+            }
+            
+            SpeedDisplay.text = String.Format("Speed: {0:F1} km/h", speed.x);
+        }
+
+        public void DisplayBattery(float batteryLevel)
+        {
+            if(BatteryDisplay == null)
+            {
+                return;
+            }
+
+            try
+            {
+                if (batteryLevel > 0.75)
+                {
+                    BatteryDisplay.text = "<sprite=\"BatterySprite\" index=0>";
+                }
+                else if (batteryLevel > 0.50)
+                {
+                    BatteryDisplay.text = "<sprite=\"BatterySprite\" index=1>";
+                }
+                else if (batteryLevel > 0.25)
+                {
+                    BatteryDisplay.text = "<sprite=\"BatterySprite\" index=2>";
+                }
+                else if (batteryLevel > 0.05)
+                {
+                    BatteryDisplay.text = "<sprite=\"BatterySprite\" index=3>";
+                }
+                else
+                {
+                    BatteryDisplay.text = "<sprite=\"BatterySprite\" index=4>";
+                }
+            }
+            catch (Exception)
             {
                 BatteryDisplay.text = "<sprite=\"BatterySprite\" index=0>";
+                Debug.Log("Battery Exception");
             }
-            else if (batteryLevel > 50)
-            {
-                BatteryDisplay.text = "<sprite=\"BatterySprite\" index=1>";
-            }
-            else if (batteryLevel > 25)
-            {
-                BatteryDisplay.text = "<sprite=\"BatterySprite\" index=2>";
-            }
-            else if (batteryLevel > 5)
-            {
-                BatteryDisplay.text = "<sprite=\"BatterySprite\" index=3>";
-            }
-            else
-            {
-                BatteryDisplay.text = "<sprite=\"BatterySprite\" index=4>";
-            }
-        } catch (FormatException e)
+        }
+
+        private IEnumerator UpdateHUD()
         {
-            
+            while (true)
+            {
+                RickshawSpeed = RickshawStateManager.Instance.RealRickshawSpeed;
+                BatteryLevel = RickshawStateManager.Instance.RealRickshawBatteryLevel;
+                DisplaySpeed(RickshawSpeed);
+                DisplayBattery(BatteryLevel);
+                yield return new WaitForSeconds(UpdateInterval);
+            }
         }
     }
 }

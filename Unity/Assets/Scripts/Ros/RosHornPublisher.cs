@@ -17,6 +17,7 @@ namespace TeleRickshaw.Rickshaw
             string msgString = MUSIC_CHAR + 1.ToString();
             RosSharp.RosBridgeClient.Messages.Standard.String msg = new RosSharp.RosBridgeClient.Messages.Standard.String(msgString);
             Publish(msg);
+            Debug.Log("Music!!");
         }
     }
 }

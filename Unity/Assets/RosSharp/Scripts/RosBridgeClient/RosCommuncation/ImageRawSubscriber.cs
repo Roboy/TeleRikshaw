@@ -18,7 +18,7 @@ using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
     [RequireComponent(typeof(RosConnector))]
-    public class ImageSubscriber : Subscriber<Messages.Sensor.CompressedImage>
+    public class ImageRawSubscriber : Subscriber<Messages.Sensor.Image>
     {
         public MeshRenderer meshRenderer;
 
@@ -30,7 +30,7 @@ namespace RosSharp.RosBridgeClient
         {
 			base.Start();
             texture2D = new Texture2D(1, 1);
-            meshRenderer.material = new Material(Shader.Find("HDRP/Lit"));
+            meshRenderer.material = new Material(Shader.Find("Standard"));
         }
         private void Update()
         {
@@ -38,9 +38,9 @@ namespace RosSharp.RosBridgeClient
                 ProcessMessage();
         }
 
-        protected override void ReceiveMessage(Messages.Sensor.CompressedImage compressedImage)
+        protected override void ReceiveMessage(Messages.Sensor.Image image)
         {
-            imageData = compressedImage.data;
+            imageData = image.data;
             isMessageReceived = true;
         }
 

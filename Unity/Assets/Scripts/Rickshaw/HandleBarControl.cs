@@ -68,7 +68,8 @@ namespace TeleRickshaw.Rickshaw
             //Debug.Log(m_SteerAngle);
 
             //  update the state of steer in RickshawStateManager
-            RickshawStateManager.Instance.VirtualRickshawSteer = new Vector3(0, 0,Mathf.Deg2Rad * m_SteerAngle);
+            //  have to flip the sign of the steering angle due to different coordinate system of unity and gazebo
+            RickshawStateManager.Instance.VirtualRickshawSteer = new Vector3(0, 0, -Mathf.Deg2Rad * m_SteerAngle);
 
         }
         #endregion MONOBEHAVIOUR_FUNCTIONS

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using RosSharp.RosBridgeClient;
+using TeleRickshaw.Game;
 
-public class RosBatterySubscriber : Subscriber<RosSharp.RosBridgeClient.Messages.Standard.String>
+public class RosBatterySubscriber : Subscriber<RosSharp.RosBridgeClient.Messages.Standard.Float32>
 {
-    public string messageData;
-    public HudDisplay hudDisplay;
+    public float messageData;
    
 
     protected override void Start()
@@ -12,8 +12,9 @@ public class RosBatterySubscriber : Subscriber<RosSharp.RosBridgeClient.Messages
         base.Start();
     }
 
-    protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Standard.String message)
+    protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Standard.Float32 message)
     {
         messageData = message.data;
+        RickshawStateManager.Instance.RealRickshawBatteryLevel = messageData;
     }
 }

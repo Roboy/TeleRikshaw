@@ -15,5 +15,7 @@ namespace TeleRickshaw.Game
 
         public Vector3 RealRickshawSpeed { get; set; }
         public Vector3 RealRickshawSteer { get; set; }
+
+        public float RealRickshawBatteryLevel { get; set; }
     }
 }

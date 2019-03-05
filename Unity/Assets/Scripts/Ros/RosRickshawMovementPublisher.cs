@@ -16,6 +16,7 @@ namespace TeleRickshaw.Rickshaw
         private const float MIN_ANGLE = -0.52f;
         private const float MAX_ANGLE = 0.52f;
         private const float FORWARD_ANGLE = 0f;
+        public float DISCOUNT_FACTOR = 0.1f;
 
         private Coroutine publishCoroutine = null;
 
@@ -46,7 +47,7 @@ namespace TeleRickshaw.Rickshaw
                 {
                     x = 0,
                     y = 0,
-                    z = Mathf.Clamp(RickshawStateManager.Instance.VirtualRickshawSteer.z, MIN_ANGLE, MAX_ANGLE)
+                    z = Mathf.Clamp(RickshawStateManager.Instance.VirtualRickshawSteer.z, MIN_ANGLE*DISCOUNT_FACTOR, MAX_ANGLE*DISCOUNT_FACTOR)
                 };
                 msg.linear = speed;
                 msg.angular = steer;
