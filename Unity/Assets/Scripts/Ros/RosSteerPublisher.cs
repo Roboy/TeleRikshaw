@@ -9,13 +9,13 @@ namespace TeleRickshaw.Rickshaw
     public class RosSteerPublisher : Publisher<Int16>
     {
         private const string STEER_CHAR = "D";
-        private const float MIN_ANGLE = 40;
-        private const float MAX_ANGLE = 140;
-        private const float FORWARD_ANGLE = 90;
+        private const float MIN_ANGLE = 55;
+        private const float MAX_ANGLE = 125;
+        private const float FORWARD_ANGLE = 80;
 
         private Coroutine publishCoroutine = null;
 
-        public float PublishPeriod = 0.3f;
+        public float PublishInterval = 0.3f;
 
         protected override void Start()
         {
@@ -31,11 +31,11 @@ namespace TeleRickshaw.Rickshaw
         {
             while (true)
             {
-                int angle = (int)Mathf.Clamp(FORWARD_ANGLE + (RickshawStateManager.Instance.VirtualRickshawSteer.z * 50), MIN_ANGLE, MAX_ANGLE);
+                int angle = (int)Mathf.Clamp(FORWARD_ANGLE + (RickshawStateManager.Instance.VirtualRickshawSteer.z * 45), MIN_ANGLE, MAX_ANGLE);
                 Int16 msg = new Int16(angle);
                 Publish(msg);
 
-                yield return new WaitForSeconds(PublishPeriod);
+                yield return new WaitForSeconds(PublishInterval);
             }
 
         }

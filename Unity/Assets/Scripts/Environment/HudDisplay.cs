@@ -79,7 +79,6 @@ namespace TeleRickshaw.Rickshaw
             catch (Exception)
             {
                 BatteryDisplay.text = "<sprite=\"BatterySprite\" index=0>";
-                Debug.Log("Battery Exception");
             }
         }
 

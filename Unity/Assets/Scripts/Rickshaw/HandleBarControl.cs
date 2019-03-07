@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Valve.VR;
 using TeleRickshaw.Game;
 
@@ -16,12 +17,14 @@ namespace TeleRickshaw.Rickshaw
         public SteamVR_Action_Single AccelerateAction;
         public SteamVR_Action_Single BrakeAction;
 
-        public HudDisplay Hud;
+        public RosHornPublisher rosHornPublisher;
 
         #endregion // PUBLIC_VARIABLES
 
         #region PRIVATE_VARIABLES
         private bool m_ControllerInitialized = false;
+
+        private bool isMusicPlaying = false;
 
         private Vector3 m_ForwardVector;
         private Vector3 m_ControllerForwardVector;
@@ -131,7 +134,10 @@ namespace TeleRickshaw.Rickshaw
 
         private void PlayMusic(SteamVR_Action_In action_In)
         {
-            RickshawStateManager.Instance.Music = true;
+            if(rosHornPublisher != null)
+            {
+                rosHornPublisher.PlayBuzzer(500);
+            }
         }
 
         #endregion PRIVATE_MEMBER_FUNCTIONS

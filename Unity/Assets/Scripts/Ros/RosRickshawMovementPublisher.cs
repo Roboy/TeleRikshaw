@@ -20,7 +20,7 @@ namespace TeleRickshaw.Rickshaw
 
         private Coroutine publishCoroutine = null;
 
-        public float PublishPeriod = 0.3f;
+        public float PublishInterval = 0.3f;
 
         protected override void Start()
         {
@@ -53,7 +53,7 @@ namespace TeleRickshaw.Rickshaw
                 msg.angular = steer;
                 Publish(msg);
 
-                yield return new WaitForSeconds(PublishPeriod);
+                yield return new WaitForSeconds(PublishInterval);
             }
         }
 

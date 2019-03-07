@@ -1,23 +1,34 @@
 ﻿using UnityEngine;
+using System.Collections;
 using RosSharp.RosBridgeClient;
 
 namespace TeleRickshaw.Rickshaw
 {
-    public class RosHornPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
+    public class RosHornPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.Int16>
     {
-        private const string MUSIC_CHAR = "J";
+        private bool isBuzzerPlaying = false;
 
         protected void Start()
         {
             base.Start();
         }
 
-        public void PlayMusic()
+        public void PlayBuzzer(int playCount)
         {
-            string msgString = MUSIC_CHAR + 1.ToString();
-            RosSharp.RosBridgeClient.Messages.Standard.String msg = new RosSharp.RosBridgeClient.Messages.Standard.String(msgString);
+            if (!isBuzzerPlaying)
+            {
+                isBuzzerPlaying = true;
+                StartCoroutine(PublishBuzzerMsg(playCount));
+            }
+        }
+
+        private IEnumerator PublishBuzzerMsg(int playCount)
+        {
+            Debug.Log("publish music");
+            RosSharp.RosBridgeClient.Messages.Standard.Int16 msg = new RosSharp.RosBridgeClient.Messages.Standard.Int16(playCount);
             Publish(msg);
-            Debug.Log("Music!!");
+            yield return new WaitForSeconds(1);
+            isBuzzerPlaying = false;
         }
     }
 }

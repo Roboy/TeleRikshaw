@@ -10,12 +10,12 @@ namespace TeleRickshaw.Rickshaw
     {
         private const string SPEED_CHAR = "S";
         private const float MIN_SPEED = 0;
-        private const float MAX_SPEED = 510;
+        private const float MAX_SPEED = 400;
         private const float ZERO_SPEED = 255;
 
         private Coroutine publishCoroutine = null;
 
-        public float PublishPeriod = 0.3f;
+        public float PublishInterval = 0.3f;
 
         protected override void Start()
         {
@@ -35,7 +35,7 @@ namespace TeleRickshaw.Rickshaw
                 Int16 msg = new Int16(spd);
                 Publish(msg);
 
-                yield return new WaitForSeconds(PublishPeriod);
+                yield return new WaitForSeconds(PublishInterval);
             }
             
         }
