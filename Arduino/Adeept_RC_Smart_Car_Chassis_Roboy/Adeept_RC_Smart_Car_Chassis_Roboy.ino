@@ -71,10 +71,15 @@ void musicCb( const std_msgs::Int16& msg){
   jingleBellsJ(msg.data);
 }
 
+void buzzerCb( const std_msgs::Int16& msg){
+  buzzB(msg.data);
+}
+
 //ROS subscriber
 ros::Subscriber<std_msgs::Int16> sub_direction("direction_car", &directionCb );
 ros::Subscriber<std_msgs::Int16> sub_speed("speed_car", &speedCb );
 ros::Subscriber<std_msgs::Int16> sub_music("music", &musicCb );
+ros::Subscriber<std_msgs::Int16> sub_buzzer("buzzer", &buzzerCb );
 
 // car will run this instruction once when turned on 
 void setup() {
@@ -101,6 +106,7 @@ void setup() {
   nh.subscribe(sub_direction);
   nh.subscribe(sub_speed);
   nh.subscribe(sub_music);
+  nh.subscribe(sub_buzzer);
   nh.advertise(pub_speed);
   
 }
