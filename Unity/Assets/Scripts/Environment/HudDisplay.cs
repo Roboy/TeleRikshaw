@@ -36,7 +36,6 @@ namespace TeleRickshaw.Rickshaw
             {
                 return;
             }
-            Debug.Log(speed);
             if (speed == null)
             {
                 SpeedDisplay.text = String.Format("Speed: {0:F1} km/h", 2.6);
